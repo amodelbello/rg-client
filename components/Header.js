@@ -9,24 +9,26 @@ const links = [
   return link;
 });
 
-const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link prefetch href="/">
-          <a>Home</a>
-        </Link>
-      </li>
+const Header = () => (
+  <header>
+    <nav>
       <ul>
-        {links.map(({ key, href, label }) => (
-          <li key={key}>
-            <Link href={href}>
-              <a>{label}</a>
-            </Link>
-          </li>
-        ))}
+        <li>
+          <Link prefetch href="/">
+            <a>Home</a>
+          </Link>
+        </li>
+        <ul>
+          {links.map(({ key, href, label }) => (
+            <li key={key}>
+              <Link href={href}>
+                <a>{label}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </ul>
-    </ul>
+    </nav>
 
     <style jsx>{`
       :global(body) {
@@ -54,7 +56,7 @@ const Nav = () => (
         font-size: 13px;
       }
     `}</style>
-  </nav>
+  </header>
 );
 
-export default Nav;
+export default Header;

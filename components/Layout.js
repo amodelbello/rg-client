@@ -1,6 +1,6 @@
 import React from 'react';
 import NextHead from 'next/head';
-import Nav from './Nav';
+import Header from './Header';
 import Footer from './Footer';
 
 import { string } from 'prop-types';
@@ -36,7 +36,7 @@ const Layout = ({ children, title = 'Red or Green', ...props }) => (
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />=
     </NextHead>
-    <Nav />
+    <Header />
     {children}
     <Footer />
   </React.Fragment>
