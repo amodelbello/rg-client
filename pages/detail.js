@@ -12,6 +12,7 @@ const business = {
 
 const Detail = ({ title = 'This is the detail' }) => (
   <Layout title={title}>
+    <h1>{title || 'hello'}</h1>
     <div>
       <Link href="/">
         <a>Home</a>

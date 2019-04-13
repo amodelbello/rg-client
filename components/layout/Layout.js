@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NextHead from 'next/head';
+
 import Header from './Header';
 import Footer from './Footer';
 
-import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../static/css/base.css';
 
 const defaultDescription = '';
-const defaultOGURL = '';
-const defaultOGImage = '';
 
 const Layout = ({ children, title = 'Red or Green', ...props }) => (
   <React.Fragment>
@@ -23,18 +24,6 @@ const Layout = ({ children, title = 'Red or Green', ...props }) => (
       <link rel="apple-touch-icon" href="/static/touch-icon.png" />
       <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
       <link rel="icon" href="/static/favicon.ico" />
-      <meta property="og:url" content={props.url || defaultOGURL} />
-      <meta property="og:title" content={props.title || ''} />
-      <meta
-        property="og:description"
-        content={props.description || defaultDescription}
-      />
-      <meta name="twitter:site" content={props.url || defaultOGURL} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={props.ogImage || defaultOGImage} />
-      <meta property="og:image" content={props.ogImage || defaultOGImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />=
     </NextHead>
     <Header />
     {children}
