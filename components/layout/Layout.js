@@ -3,7 +3,7 @@ import NextHead from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
 
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
 
 const defaultDescription = '';
 const defaultOGURL = '';
@@ -43,11 +43,11 @@ const Layout = ({ children, title = 'Red or Green', ...props }) => (
 );
 
 Layout.propTypes = {
-  children: Object,
-  title: string,
-  description: string,
-  url: string,
-  ogImage: string,
+  children: PropTypes.arrayOf(Object),
+  title: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  ogImage: PropTypes.string,
 };
 
 export default Layout;

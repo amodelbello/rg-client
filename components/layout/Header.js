@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 const links = [
   { href: '/detail', label: 'Detail' },
@@ -9,7 +10,7 @@ const links = [
   return link;
 });
 
-const Header = () => (
+const Header = ({ children }) => (
   <header>
     <nav>
       <ul>
@@ -28,6 +29,7 @@ const Header = () => (
           ))}
         </ul>
       </ul>
+      {children}
     </nav>
 
     <style jsx>{`
@@ -58,5 +60,9 @@ const Header = () => (
     `}</style>
   </header>
 );
+
+Header.propTypes = {
+  children: PropTypes.arrayOf(Object),
+};
 
 export default Header;
