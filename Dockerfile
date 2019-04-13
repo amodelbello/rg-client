@@ -4,4 +4,4 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
 RUN yarn install
-CMD ["yarn", "dev", "--", "-p", "3001"]
+CMD ["yarn", "dev", "-p", "3001"]
