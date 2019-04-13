@@ -9,6 +9,10 @@ const Footer = () => (
     </ul>
 
     <style jsx>{`
+      footer ul {
+        width: 320px;
+        margin: 0 auto;
+      }
       footer ul li {
         float: left;
         margin-right: 60px;

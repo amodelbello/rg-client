@@ -1,16 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import Head from '../components/head';
-import Nav from '../components/nav';
-import Footer from '../components/footer';
 
-const Home = () => (
-  <React.Fragment>
-    <Head title="Home" />
-    <Nav />
+import Layout from '../components/Layout';
+import { string } from 'prop-types';
 
+const Home = ({ title = 'Index!' }) => (
+  <Layout title={title}>
     <div className="hero">
-      <h1 className="title">Welcome to Next!</h1>
+      <h1 className="title">{title}</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
       </p>
@@ -39,8 +36,6 @@ const Home = () => (
         </Link>
       </div>
     </div>
-
-    <Footer />
 
     <style jsx>{`
       .hero {
@@ -88,7 +83,12 @@ const Home = () => (
         color: #333;
       }
     `}</style>
-  </React.Fragment>
+  </Layout>
 );
+
+Home.propTypes = {
+  title: string,
+  description: string,
+};
 
 export default Home;
