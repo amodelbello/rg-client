@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { string } from 'prop-types';
 
-import Layout from '../components/layout/Layout';
+import { Layout } from '../components/layout';
 import Businesses from '../components/Businesses';
 
 const businesses = [{ name: 'hello', k: 0 }, { name: 'bababa', k: 1 }];

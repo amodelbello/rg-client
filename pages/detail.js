@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import Layout from '../components/layout/Layout';
+import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 const business = {
