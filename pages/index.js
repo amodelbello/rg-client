@@ -7,13 +7,15 @@ import Businesses from '../components/Businesses';
 
 const businesses = [{ name: 'hello', k: 0 }, { name: 'bababa', k: 1 }];
 
+const id = 'xxx';
+
 const Home = ({ title = 'Restaurants' }) => (
   <Layout title={title}>
     <div className="hero">
       <h1 className="title">{title}</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
-        <Link href="/detail">
+        <Link as={`/detail/${id}`} href={`/detail?id=${id}`}>
           <a>Detail</a>
         </Link>
       </p>
