@@ -1,6 +1,6 @@
+/* eslint-disable no-console */
 const express = require('express');
 const next = require('next');
-const winston = require('winston');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -15,8 +15,8 @@ app
     server.get('/detail/:id', (req, res) => {
       const actualPage = '/detail';
       const queryParams = { id: req.params.id };
-      console.log(actualPage);
-      console.log(queryParams);
+      console.log('actualPage', actualPage);
+      console.log('queryParams', queryParams);
       return handle(req, res, actualPage, queryParams);
     });
 
@@ -30,6 +30,6 @@ app
     });
   })
   .catch(e => {
-    winston.log(e.stack);
+    console.log(e.stack);
     process.exit(1);
   });
