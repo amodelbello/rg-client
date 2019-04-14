@@ -4,7 +4,6 @@ const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-
 const handle = app.getRequestHandler();
 
 app
@@ -15,9 +14,7 @@ app
     server.get('/detail/:id', (req, res) => {
       const actualPage = '/detail';
       const queryParams = { id: req.params.id };
-      console.log('actualPage', actualPage);
-      console.log('queryParams', queryParams);
-      return handle(req, res, actualPage, queryParams);
+      app.render(req, res, actualPage, queryParams);
     });
 
     server.get('*', (req, res) => {
