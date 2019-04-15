@@ -10,7 +10,7 @@ import '../../static/css/base.css';
 
 const defaultDescription = '';
 
-const Layout = ({ children, title = 'Red or Green', ...props }) => (
+const Layout = ({ children, title = 'Best Chile', ...props }) => (
   <React.Fragment>
     <NextHead>
       <meta charSet="UTF-8" />
@@ -37,8 +37,6 @@ Layout.propTypes = {
   children: PropTypes.arrayOf(Object),
   title: PropTypes.string,
   description: PropTypes.string,
-  url: PropTypes.string,
-  ogImage: PropTypes.string,
 };
 
 export default Layout;
