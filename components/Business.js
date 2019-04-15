@@ -10,17 +10,20 @@ const Business = ({ format = 'long', business }) => {
   const greenRating = ratingByCategory(business.averageRatings, 'Green Chile');
 
   return (
-    <section>
-      <h5>{business.name}</h5>
-      {format === 'long' && <p>{business.address}</p>}
-      <dl>
-        <dt>Red</dt>
-        <dd>{redRating && redRating.rating}</dd>
-
-        <dt>Green</dt>
-        <dd>{greenRating && greenRating.rating}</dd>
-      </dl>
-    </section>
+    <li>
+      <h3>{business.name}</h3>
+      {format === 'long' && <div>{business.address}</div>}
+      <div>
+        <p>
+          <span>Red: </span>
+          {redRating && redRating.rating}
+        </p>
+        <p>
+          <span>Green: </span>
+          {greenRating && greenRating.rating}
+        </p>
+      </div>
+    </li>
   );
 };
 

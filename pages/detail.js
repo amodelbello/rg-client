@@ -17,7 +17,7 @@ const Detail = ({ title = 'This is the detail' }) => (
       <Link href="/">
         <a>Home</a>
       </Link>
-      <Business business={business} />
+      {/* <Business business={business} /> */}
     </div>
 
     <style jsx>{`

@@ -22,7 +22,7 @@ const Home = ({ title = 'Restaurants' }) => (
         </Link>
       </p>
 
-      <Businesses businesses={businesses} />
+      <Businesses />
     </div>
 
     <style jsx>{`
