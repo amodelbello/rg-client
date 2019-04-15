@@ -18,7 +18,7 @@ const Businesses = props => {
           ))}
         </ul>
       ) : (
-        <p>No businesses</p>
+        <p>Loading...</p>
       )}
     </React.Fragment>
   );
