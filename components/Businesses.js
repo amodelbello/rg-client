@@ -1,19 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import Business from './Business';
 
 // eslint-disable-next-line no-unused-vars
-const Businesses = ({ businesses, ...props }) => (
-  <ul>
-    {businesses.map((business, k) => (
-      <Business business={business} format={'short'} key={k} />
-    ))}
-  </ul>
-);
+const Businesses = props => {
+  const { businesses } = props.allBusinessesQuery;
 
-Businesses.propTypes = {
-  businesses: PropTypes.arrayOf(Object),
+  return (
+    <React.Fragment>
+      {businesses && businesses.length ? (
+        <ul>
+          {businesses.map((business, k) => (
+            <Business business={business} format={'short'} key={k} />
+          ))}
+        </ul>
+      ) : (
+        <p>No businesses</p>
+      )}
+    </React.Fragment>
+  );
 };
 
-export default Businesses;
+const ALL_BUSINESSES_QUERY = gql`
+  {
+    businesses {
+      id
+      name
+      # ratings {
+      #   category {
+      #     name
+      #   }
+      #   rating
+      # }
+    }
+  }
+`;
+Businesses.propTypes = {
+  allBusinessesQuery: PropTypes.object,
+};
+
+export default graphql(ALL_BUSINESSES_QUERY, { name: 'allBusinessesQuery' })(
+  Businesses
+);

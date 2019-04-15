@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { string } from 'prop-types';
+import PropTypes from 'prop-types';
+
+import withData from '../lib/withData';
 
 import { Layout } from '../components/layout';
 import Businesses from '../components/Businesses';
@@ -73,8 +75,8 @@ const Home = ({ title = 'Restaurants' }) => (
 );
 
 Home.propTypes = {
-  title: string,
-  description: string,
+  title: PropTypes.string,
+  description: PropTypes.string,
 };
 
-export default Home;
+export default withData(Home);
