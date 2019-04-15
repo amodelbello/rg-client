@@ -26,8 +26,10 @@ const Layout = ({ children, title = 'Red or Green', ...props }) => (
       <link rel="icon" href="/static/favicon.ico" />
     </NextHead>
     <Header />
-    {children}
-    <Footer />
+    <div className="container">{children}</div>
+    <div className="bg-light">
+      <Footer />
+    </div>
   </React.Fragment>
 );
 

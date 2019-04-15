@@ -7,8 +7,6 @@ import withData from '../lib/withData';
 import { Layout } from '../components/layout';
 import Businesses from '../components/Businesses';
 
-const businesses = [{ name: 'hello', k: 0 }, { name: 'bababa', k: 1 }];
-
 const id = 'xxx';
 
 const Home = ({ title = 'Restaurants' }) => (

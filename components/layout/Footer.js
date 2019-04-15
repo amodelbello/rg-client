@@ -1,26 +1,21 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer>
-    <ul>
-      <li>item 1</li>
-      <li>item 2</li>
-      <li className="last">item 3</li>
-    </ul>
+  <footer className="container page-footer font-small blue pt-4">
+    <div className="container-fluid text-center text-md-left">
+      <div className="row">
+        <div className="col">
+          <h5 className="text-uppercase">Footer Content</h5>
+          <p>
+            Here you can use rows and columns here to organize your footer Here
+            you can use rows and columns here to organize your footer Here you
+            can use rows and columns here to organize your footer content.
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <style jsx>{`
-      footer ul {
-        width: 320px;
-        margin: 0 auto;
-      }
-      footer ul li {
-        float: left;
-        margin-right: 60px;
-      }
-      footer ul li.last {
-        clear: both:
-      }
-    `}</style>
+    <div className="footer-copyright text-center py-3">© 2019 Copyright</div>
   </footer>
 );
 
