@@ -29,12 +29,10 @@ const ALL_BUSINESSES_QUERY = gql`
     businesses {
       id
       name
-      # ratings {
-      #   category {
-      #     name
-      #   }
-      #   rating
-      # }
+      averageRatings {
+        category
+        rating
+      }
     }
   }
 `;
