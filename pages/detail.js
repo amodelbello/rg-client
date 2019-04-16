@@ -9,9 +9,9 @@ import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 const Detail = props => {
-  const title = 'bababa';
-  props.businessQuery.variables.id = '5b14b27d3450501de43d2f98';
+  props.businessQuery.variables.id = props.url.query.id;
   const { business } = props.businessQuery;
+  const title = business ? `${business.name}` : '';
 
   return (
     <Layout title={title}>
@@ -36,6 +36,7 @@ Detail.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   businessQuery: PropTypes.object,
+  url: PropTypes.object,
 };
 
 const BUSINESS_QUERY = gql`
