@@ -1,43 +1,53 @@
 import React from 'react';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
+import Router, { withRouter } from 'next/router';
 
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
+import tokenHelper from '../lib/tokenHelper';
 
 import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
-const Detail = ({ router, businessQuery }) => {
-  businessQuery.variables.id = router.query.id;
-  const { business } = businessQuery;
-  const title = business ? `${business.name}` : '';
+class Detail extends React.Component {
+  componentDidMount() {
+    if (!tokenHelper.hasToken()) {
+      Router.push('/login');
+    }
+  }
 
-  return (
-    <Layout title={title}>
-      <h1>{title || 'hello'}</h1>
-      <div>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Business business={business} />
-      </div>
+  render() {
+    this.props.businessData.variables.id = this.props.router.query.id;
+    const { business } = this.props.businessData;
+    this.title = business ? `${business.name}` : '';
 
-      <style jsx>{`
-        div {
-          text-align: center;
-        }
-      `}</style>
-    </Layout>
-  );
-};
+    console.log('render business', business);
+    return (
+      <Layout title={this.title}>
+        <h1>{this.title || 'hello'}</h1>
+        <div>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+          <Business business={business} />
+        </div>
+
+        <style jsx>{`
+          div {
+            text-align: center;
+          }
+        `}</style>
+      </Layout>
+    );
+  }
+}
 
 Detail.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  businessQuery: PropTypes.object,
+  businessData: PropTypes.object,
   router: PropTypes.object,
 };
 
@@ -63,5 +73,5 @@ const BUSINESS_QUERY = gql`
 `;
 
 export default withRouter(
-  withData(graphql(BUSINESS_QUERY, { name: 'businessQuery' })(Detail))
+  withData(graphql(BUSINESS_QUERY, { name: 'businessData' })(Detail))
 );
