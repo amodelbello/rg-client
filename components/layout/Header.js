@@ -1,5 +1,5 @@
 import React from 'react';
-// import Link from 'next/link';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 const Header = ({ children }) => (
@@ -23,9 +23,11 @@ const Header = ({ children }) => (
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
-            </a>
+            <Link href="/">
+              <a className="nav-link">
+                Home <span className="sr-only">(current)</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
