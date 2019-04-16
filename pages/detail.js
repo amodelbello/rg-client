@@ -47,6 +47,13 @@ const BUSINESS_QUERY = gql`
         category
         rating
       }
+      address {
+        street
+        street2
+        city
+        state
+        zip
+      }
     }
   }
 `;
