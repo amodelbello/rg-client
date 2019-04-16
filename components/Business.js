@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
+import Address from './Address';
+
 const ratingByCategory = (ratings, category) => {
   return ratings && ratings.length
     ? ratings.filter(rating => rating.category === category)[0]
@@ -24,50 +26,17 @@ const Business = ({ format = 'long', business }) => {
         <div className="card-body">
           <h4 className="card-title">{business.name}</h4>
           {format === 'long' && (
-            <h6 className="card-subtitle mb-2 text-muted">
-              {address.street ? (
-                <React.Fragment>
-                  {address.street}
-                  <br />
-                </React.Fragment>
-              ) : (
-                ''
+            <React.Fragment>
+              <h6 className="card-subtitle mb-2 text-muted">
+                <Address address={address} />
+              </h6>
+              {business.phone && (
+                <h6 className="card-subtitle mb-2 text-muted">
+                  {business.phone}
+                </h6>
               )}
-              {address.street2 ? (
-                <React.Fragment>
-                  {address.street2}
-                  <br />
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-              {address.city ? (
-                <React.Fragment>
-                  {address.city}
-                  <br />
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-              {address.state ? (
-                <React.Fragment>
-                  {address.state}
-                  <br />
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-              {address.zip ? (
-                <React.Fragment>
-                  {address.zip}
-                  <br />
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-            </h6>
+            </React.Fragment>
           )}
-
           <div className="card-text">
             <p>
               <span>Red: </span>
@@ -101,6 +70,7 @@ Business.propTypes = {
       state: PropTypes.string,
       zip: PropTypes.string,
     }),
+    phone: PropTypes.string,
     averageRatings: PropTypes.arrayOf(
       PropTypes.shape({ name: PropTypes.string, rating: Number })
     ),

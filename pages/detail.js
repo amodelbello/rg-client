@@ -54,6 +54,7 @@ const BUSINESS_QUERY = gql`
         state
         zip
       }
+      phone
     }
   }
 `;
