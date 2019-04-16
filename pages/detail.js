@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { withRouter } from 'next/router';
+
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -8,9 +10,9 @@ import withData from '../lib/withData';
 import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
-const Detail = props => {
-  props.businessQuery.variables.id = props.url.query.id;
-  const { business } = props.businessQuery;
+const Detail = ({ router, businessQuery }) => {
+  businessQuery.variables.id = router.query.id;
+  const { business } = businessQuery;
   const title = business ? `${business.name}` : '';
 
   return (
@@ -36,7 +38,7 @@ Detail.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   businessQuery: PropTypes.object,
-  url: PropTypes.object,
+  router: PropTypes.object,
 };
 
 const BUSINESS_QUERY = gql`
@@ -60,6 +62,6 @@ const BUSINESS_QUERY = gql`
   }
 `;
 
-export default withData(
-  graphql(BUSINESS_QUERY, { name: 'businessQuery' })(Detail)
+export default withRouter(
+  withData(graphql(BUSINESS_QUERY, { name: 'businessQuery' })(Detail))
 );
