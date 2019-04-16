@@ -12,7 +12,7 @@ import Businesses from '../components/Businesses';
 class Home extends React.Component {
   title = 'Restaurants';
 
-  componentWillMount() {
+  componentDidMount() {
     if (!tokenHelper.hasToken()) {
       Router.push('/login');
     }
