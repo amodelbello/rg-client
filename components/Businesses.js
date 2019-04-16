@@ -36,6 +36,7 @@ const ALL_BUSINESSES_QUERY = gql`
     }
   }
 `;
+
 Businesses.propTypes = {
   allBusinessesQuery: PropTypes.object,
 };
