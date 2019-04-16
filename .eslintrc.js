@@ -9,6 +9,7 @@ module.exports = {
     quotes: ['error', 'single', { avoidEscape: true }],
     'comma-dangle': ['error', 'always-multiline'],
     'no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
+    'no-console': 'warn',
   },
   settings: {
     react: {
