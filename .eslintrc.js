@@ -16,4 +16,8 @@ module.exports = {
       version: '16.8.6',
     },
   },
+  globals: {
+    localStorage: true,
+    fetch: true,
+  },
 };
