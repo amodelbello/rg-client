@@ -7,16 +7,14 @@ import withData from '../lib/withData';
 import { Layout } from '../components/layout';
 import Businesses from '../components/Businesses';
 
-const id = 'xxx';
-
 const Home = ({ title = 'Restaurants' }) => (
   <Layout title={title}>
     <div className="hero">
       <h1 className="title">{title}</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
-        <Link as={`/detail/${id}`} href={`/detail?id=${id}`}>
-          <a>Detail</a>
+        <Link href={'/login'}>
+          <a>Login</a>
         </Link>
       </p>
 
