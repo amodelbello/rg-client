@@ -1,0 +1,33 @@
+{
+  // This doesn't work. The debugger connects but the breakpoints are wonky
+  // Probably an issue with the sourcemap mapping but they look correct to me
+  // Will just use chrome devtools debugging for now
+  // TODO: Revisit this when there's time
+
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Next: Chrome",
+      "url": "http://localhost:3000/",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Next: Node",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "debug"],
+      "env": { "NODE_OPTIONS": "--inspect" },
+      "port": 9229,
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Next: Full",
+      "configurations": ["Next: Node", "Next: Chrome"]
+    }
+  ]
+}

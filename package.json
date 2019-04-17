@@ -2,6 +2,7 @@
   "name": "red-green-client",
   "scripts": {
     "dev": "nodemon -L server/server.js",
+    "debug": "node --inspect=0.0.0.0:9229 server/server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/server.js"
   },
