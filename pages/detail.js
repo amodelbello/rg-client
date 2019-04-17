@@ -12,9 +12,18 @@ import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 class Detail extends React.Component {
-  componentDidMount() {
+  static async getInitialProps({ res }) {
+    // TODO: Abstract this out to use on other pages
     if (!tokenHelper.hasToken()) {
-      Router.push('/login');
+      if (res) {
+        res.writeHead(302, {
+          Location: `//${res.req.headers.host}/login`,
+        });
+        res.end();
+      } else {
+        Router.push('/login');
+      }
+      return {};
     }
   }
 

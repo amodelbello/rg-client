@@ -30,9 +30,14 @@ const Header = ({ children }) => (
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
+            <Link href="/login">
+              <a className="nav-link">Login</a>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link href="/detail/5b14b27d3450501de43d2f98">
+              <a className="nav-link">Detail</a>
+            </Link>
           </li>
           <li className="nav-item dropdown">
             <a
