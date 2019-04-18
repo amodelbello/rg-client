@@ -11,17 +11,23 @@ import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 class Detail extends React.Component {
-  title = 'Restaurant';
+  state = {
+    title: 'Restaurant',
+  };
 
   static async getInitialProps({ res }) {
     const authHelper = new AuthHelper(res);
     authHelper.checkAuth();
   }
 
+  updateTitle = title => {
+    this.setState({ title });
+  };
+
   render() {
     return (
-      <Layout title={this.title}>
-        <h1>{this.title || 'hello'}</h1>
+      <Layout title={this.state.title}>
+        <h1>{this.state.title || 'hello'}</h1>
         <div>
           <Link href="/">
             <a>Home</a>
@@ -34,7 +40,12 @@ class Detail extends React.Component {
               if (loading) return <h1>Loading...</h1>;
               if (error) return <h1>ERROR!</h1>;
 
-              return <Business business={data.business} />;
+              return (
+                <Business
+                  business={data.business}
+                  updateParentTitle={this.updateTitle}
+                />
+              );
             }}
           </Query>
         </div>

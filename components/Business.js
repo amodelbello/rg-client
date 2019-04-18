@@ -5,63 +5,82 @@ import Link from 'next/link';
 import Address from './Address';
 
 const ratingByCategory = (ratings, category) => {
-  return ratings && ratings.length
-    ? ratings.filter(rating => rating.category === category)[0]
-    : [];
+  if (ratings && ratings.length) {
+    const ratingArray = ratings.filter(rating => rating.category === category);
+    if (ratingArray.length) {
+      return ratingArray[0];
+    }
+  }
+  return { rating: '-' };
 };
 
-const Business = ({ format = 'long', business }) => {
-  let redRating;
-  let greenRating;
-  let address;
-  if (business) {
-    redRating = ratingByCategory(business.averageRatings, 'Red Chile');
-    greenRating = ratingByCategory(business.averageRatings, 'Green Chile');
-    address = business.address;
+class Business extends React.Component {
+  state = {
+    redRating: '-',
+    greenRating: '-',
+  };
+
+  componentDidMount() {
+    const { business, updateParentTitle } = this.props;
+    if (business) {
+      if (updateParentTitle) {
+        updateParentTitle(business.name);
+      }
+
+      this.setState({
+        redRating: ratingByCategory(business.averageRatings, 'Red Chile')
+          .rating,
+        greenRating: ratingByCategory(business.averageRatings, 'Green Chile')
+          .rating,
+      });
+    }
   }
 
-  return (
-    <div className="card">
-      {business ? (
-        <div className="card-body">
-          <h4 className="card-title">{business.name}</h4>
-          {format === 'long' && (
-            <React.Fragment>
-              <h6 className="card-subtitle mb-2 text-muted">
-                <Address address={address} />
-              </h6>
-              {business.phone && (
+  render() {
+    const { business, format } = this.props;
+    return (
+      <div className="card">
+        {business ? (
+          <div className="card-body">
+            <h4 className="card-title">{business.name}</h4>
+            {format === 'long' && (
+              <React.Fragment>
                 <h6 className="card-subtitle mb-2 text-muted">
-                  {business.phone}
+                  <Address address={business.address} />
                 </h6>
-              )}
-            </React.Fragment>
-          )}
-          <div className="card-text">
-            <p>
-              <span>Red: </span>
-              {redRating ? redRating.rating : '-'}
-            </p>
-            <p>
-              <span>Green: </span>
-              {greenRating ? greenRating.rating : '-'}
-            </p>
+                {business.phone && (
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    {business.phone}
+                  </h6>
+                )}
+              </React.Fragment>
+            )}
+            <div className="card-text">
+              <p>
+                <span>Red: </span>
+                {this.state.redRating}
+              </p>
+              <p>
+                <span>Green: </span>
+                {this.state.greenRating}
+              </p>
+            </div>
+            {format === 'short' && (
+              <Link
+                as={`/detail/${business.id}`}
+                href={`/detail?id=${business.id}`}
+              >
+                <a className="card-link">View</a>
+              </Link>
+            )}
           </div>
-          {format === 'short' && (
-            <Link
-              as={`/detail/${business.id}`}
-              href={`/detail?id=${business.id}`}
-            >
-              <a className="card-link">View</a>
-            </Link>
-          )}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
-};
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+    );
+  }
+}
 
 Business.propTypes = {
   business: PropTypes.shape({
@@ -79,6 +98,7 @@ Business.propTypes = {
     ),
   }),
   format: PropTypes.string,
+  updateParentTitle: PropTypes.func,
 };
 
 export default Business;
