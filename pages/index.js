@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
 import PropTypes from 'prop-types';
 
 import withData from '../lib/withData';
-import tokenHelper from '../lib/tokenHelper';
+import AuthHelper from '../lib/authHelper';
 
 import { Layout } from '../components/layout';
 import Businesses from '../components/Businesses';
@@ -12,10 +11,9 @@ import Businesses from '../components/Businesses';
 class Home extends React.Component {
   title = 'Restaurants';
 
-  componentDidMount() {
-    if (!tokenHelper.hasToken()) {
-      Router.push('/login');
-    }
+  static async getInitialProps({ res }) {
+    const authHelper = new AuthHelper(res);
+    authHelper.checkAuth();
   }
 
   render() {

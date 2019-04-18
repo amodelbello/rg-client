@@ -1,21 +1,29 @@
 import React from 'react';
-import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
-import tokenHelper from '../lib/tokenHelper';
+import AuthHelper from '../lib/authHelper';
 import { Layout } from '../components/layout';
 
 class Login extends React.Component {
   state = {
-    token: 'hello',
+    token: '',
   };
+
+  constructor(props) {
+    super(props);
+    this.authHelper = new AuthHelper();
+  }
+
+  static async getInitialProps({ res }) {
+    this.authHelper = new AuthHelper(res);
+  }
 
   title = 'Login';
 
   componentDidMount() {
-    const token = tokenHelper.getToken();
+    const token = this.authHelper.getToken();
     this.setState({
       token,
     });
@@ -28,22 +36,19 @@ class Login extends React.Component {
         password: 'password1',
       },
     });
-    const { login } = result.data;
-    tokenHelper.storeToken(login);
-
-    const token = tokenHelper.getToken();
+    const token = result.data.login;
+    this.authHelper.setToken(token);
     this.setState({
       token,
     });
-    console.log('result', login);
-    // Router.push('/');
   };
 
   logout = async () => {
-    tokenHelper.removeToken();
+    this.authHelper.removeToken();
     this.setState({
-      token: 'hello',
+      token: 'Logged Out',
     });
+    this.authHelper.redirectToLogin();
   };
 
   render() {

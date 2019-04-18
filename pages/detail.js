@@ -1,30 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import Router, { withRouter } from 'next/router';
-
+import { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
-import tokenHelper from '../lib/tokenHelper';
+import AuthHelper from '../lib/authHelper';
 
 import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 class Detail extends React.Component {
   static async getInitialProps({ res }) {
-    // TODO: Abstract this out to use on other pages
-    if (!tokenHelper.hasToken()) {
-      if (res) {
-        res.writeHead(302, {
-          Location: `//${res.req.headers.host}/login`,
-        });
-        res.end();
-      } else {
-        Router.push('/login');
-      }
-      return {};
-    }
+    const authHelper = new AuthHelper(res);
+    authHelper.checkAuth();
   }
 
   render() {
