@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import withData from '../lib/withData';
 import AuthHelper from '../lib/authHelper';
@@ -11,17 +11,14 @@ import { Layout } from '../components/layout';
 import Business from '../components/Business';
 
 class Detail extends React.Component {
+  title = 'Restaurant';
+
   static async getInitialProps({ res }) {
     const authHelper = new AuthHelper(res);
     authHelper.checkAuth();
   }
 
   render() {
-    this.props.businessData.variables.id = this.props.router.query.id;
-    const { business } = this.props.businessData;
-    this.title = business ? `${business.name}` : '';
-
-    console.log('render business', business);
     return (
       <Layout title={this.title}>
         <h1>{this.title || 'hello'}</h1>
@@ -29,7 +26,17 @@ class Detail extends React.Component {
           <Link href="/">
             <a>Home</a>
           </Link>
-          <Business business={business} />
+          <Query
+            query={BUSINESS_QUERY}
+            variables={{ id: this.props.router.query.id }}
+          >
+            {({ data, loading, error }) => {
+              if (loading) return <h1>Loading...</h1>;
+              if (error) return <h1>ERROR!</h1>;
+
+              return <Business business={data.business} />;
+            }}
+          </Query>
         </div>
 
         <style jsx>{`
@@ -70,6 +77,4 @@ const BUSINESS_QUERY = gql`
   }
 `;
 
-export default withRouter(
-  withData(graphql(BUSINESS_QUERY, { name: 'businessData' })(Detail))
-);
+export default withRouter(withData(Detail));
