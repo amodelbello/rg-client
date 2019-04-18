@@ -15,6 +15,10 @@ const ratingByCategory = (ratings, category) => {
 };
 
 class Business extends React.Component {
+  static defaultProps = {
+    format: 'long',
+  };
+
   state = {
     redRating: '-',
     greenRating: '-',
@@ -38,6 +42,7 @@ class Business extends React.Component {
 
   render() {
     const { business, format } = this.props;
+    console.log(business);
     return (
       <div className="card">
         {business ? (
