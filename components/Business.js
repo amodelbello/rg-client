@@ -48,7 +48,10 @@ const Business = ({ format = 'long', business }) => {
             </p>
           </div>
           {format === 'short' && (
-            <Link href={`/detail/${business.id}`}>
+            <Link
+              as={`/detail/${business.id}`}
+              href={`/detail?id=${business.id}`}
+            >
               <a className="card-link">View</a>
             </Link>
           )}

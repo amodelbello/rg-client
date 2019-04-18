@@ -35,7 +35,10 @@ const Header = ({ children }) => (
             </Link>
           </li>
           <li className="nav-item">
-            <Link href="/detail/5b14b27d3450501de43d2f98">
+            <Link
+              as="/detail/5b14b27d3450501de43d2f98"
+              href="/detail?id=5b14b27d3450501de43d2f98"
+            >
               <a className="nav-link">Detail</a>
             </Link>
           </li>
