@@ -4,16 +4,6 @@ import Link from 'next/link';
 
 import Address from './Address';
 
-const ratingByCategory = (ratings, category) => {
-  if (ratings && ratings.length) {
-    const ratingArray = ratings.filter(rating => rating.category === category);
-    if (ratingArray.length) {
-      return ratingArray[0];
-    }
-  }
-  return { rating: '-' };
-};
-
 class Business extends React.Component {
   static defaultProps = {
     format: 'long',
@@ -24,6 +14,18 @@ class Business extends React.Component {
     greenRating: '-',
   };
 
+  ratingByCategory(ratings, category) {
+    if (ratings && ratings.length) {
+      const ratingArray = ratings.filter(
+        rating => rating.category === category
+      );
+      if (ratingArray.length) {
+        return ratingArray[0];
+      }
+    }
+    return { rating: '-' };
+  }
+
   componentDidMount() {
     const { business, updateParentTitle } = this.props;
     if (business) {
@@ -32,17 +34,18 @@ class Business extends React.Component {
       }
 
       this.setState({
-        redRating: ratingByCategory(business.averageRatings, 'Red Chile')
+        redRating: this.ratingByCategory(business.averageRatings, 'Red Chile')
           .rating,
-        greenRating: ratingByCategory(business.averageRatings, 'Green Chile')
-          .rating,
+        greenRating: this.ratingByCategory(
+          business.averageRatings,
+          'Green Chile'
+        ).rating,
       });
     }
   }
 
   render() {
     const { business, format } = this.props;
-    console.log(business);
     return (
       <div className="card">
         {business ? (
